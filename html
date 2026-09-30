@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BeautyBox | Tienda de Maquillaje</title>
+  <style>
+    :root{
+      --bg: #fff7fb;
+      --card: #ffffff;
+      --text: #2b1b26;
+      --muted: #6a4f63;
+      --primary: #ff4fa3;
+      --primary2:#7c3aed;
+      --border: rgba(0,0,0,.08);
+      --shadow: 0 10px 30px rgba(124,58,237,.12);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(900px 400px at 10% -10%, rgba(255,79,163,.25), transparent 60%),
+        radial-gradient(900px 400px at 90% 0%, rgba(124,58,237,.20), transparent 60%),
+        var(--bg);
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .container{ width: min(1100px, 92%); margin: 0 auto; }
+
+    /* Header */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(255,247,251,.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .logo{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size: 20px;
+      box-shadow: 0 12px 25px rgba(255,79,163,.22);
+    }
+    .menu{
+      display:flex;
+      align-items:center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .menu a{
+      font-size: 14px;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .menu a:hover{
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,.6);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 42px 0 16px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: center;
+    }
+    @media (max-width: 860px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .hero h1{
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+    }
+    .gradient-text{
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p{
+      margin: 14px 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .cta{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .btn{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight: 700;
+      transition: .2s ease;
+      display:inline-flex; align-items:center; gap: 10px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+    .btn-primary{
+      border: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+    }
+
+    .hero-card{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .hero-card .mini{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 420px){
+      .hero-card .mini{ grid-template-columns: 1fr; }
+    }
+    .stat{
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      background: rgba(255,255,255,.7);
+    }
+    .stat strong{ display:block; font-size: 16px; }
+    .stat span{ color: var(--muted); font-size: 13px; }
+
+    /* Sections */
+    section{ padding: 26px 0; }
+    .section-title{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 22px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Counters (Mostradores) */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 620px){ .grid{ grid-template-columns: 1fr;} }
+
+    .counter{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      box-shadow: 0 8px 20px rgba(124,58,237,.08);
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      min-height: 250px;
+    }
+    .counter .top{
+      padding: 16px 16px 10px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .counter h3{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .counter p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .pill{
+      font-weight: 800;
+      font-size: 12px;
+      color:#fff;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      white-space: nowrap;
+    }
+    .counter .img{
+      flex:1;
+      position: relative;
+      padding: 14px 16px 18px;
+      background:
+        radial-gradient(220px 120px at 15% 20%, rgba(255,79,163,.25), transparent 60%),
+        radial-gradient(220px 120px at 85% 25%, rgba(124,58,237,.20), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,.65));
+      border-top: 1px solid var(--border);
+    }
+    .counter .items{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .tag{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* About & Contact */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){ .two-col{ grid-template-columns: 1fr; } }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(124,58,237,.08);
+    }
+    .card h3{ margin: 0 0 10px; font-size: 16px; }
+    .card p{ margin: 0; color: var(--muted); line-height: 1.7; }
+    .list{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .footer-grid{
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .social{
+      display:flex; gap: 10px; flex-wrap: wrap;
+    }
+    .social a{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.6);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+    .social a:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
+
+    /* Ajuste pequeño */
+    .sr-only{
+      position:absolute;
+      width:1px; height:1px;
+      padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0);
+      border:0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">💖</div>
+          <div>
+            <div style="font-size:14px;color:var(--muted);font-weight:700;">Tienda de Maquillaje</div>
+            <div style="font-size:18px;">BeautyBox</div>
+          </div>
+        </div>
+
+        <nav class="menu" aria-label="Navegación principal">
+          <a href="#mostradores">🛍️ Mostradores</a>
+          <a href="#productos">✨ Productos</a>
+          <a href="#nosotros">💬 Sobre nosotros</a>
+          <a href="#contacto">📞 Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="badge">✨ Asesoría • Productos cruelty-free • Envíos</div>
+
+          <!-- ✅ Eslogan personalizado: cámbialo aquí -->
+          <h1>
+            <span class="gradient-text">Tu belleza, a tu ritmo.</span><br/>
+            <span style="color:var(--text)">Eslógan personalizado: “</span>
+            <span class="gradient-text">Brilla sin pedir permiso</span>
+            <span style="color:var--text）">”</span>
+          </h1>
+
+          <p>
+            Descubre maquillaje para todos los estilos: desde looks naturales hasta glam
+            para eventos. Ven por tu tono, quédate por tu brillo.
+          </p>
+
+          <div class="cta">
+            <a class="btn btn-primary" href="#mostradores">🛍️ Ver mostradores</a>
+            <a class="btn" href="#contacto">📞 Cotizar o reservar</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumen">
+          <strong style="font-size:16px;">💡 Recomendación del día</strong>
+          <p style="margin:10px 0 0;color:var(--muted);line-height:1.6;">
+            Base ligera + rubor en crema + gloss hidratante: el combo perfecto para un look fresco.
+          </p>
+          <div class="mini">
+            <div class="stat">
+              <strong>15+ categorías</strong>
+              <span>maquillaje y skincare</span>
+            </div>
+            <div class="stat">
+              <strong>Atención rápida</strong>
+              <span>en mostrador y online</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Mostradores -->
+    <section id="mostradores">
+      <div class="section-title">
+        <h2>🛍️ Nuestros mostradores</h2>
+        <p>Elige tu estilo: cada mostrador tiene su selección.</p>
+      </div>
+
+      <div class="grid">
+        <article class="counter">
+          <div class="top">
+            <div>
+              <h3>✨ Base & Correctores</h3>
+              <p>Cobertura modulable para un acabado impecable.</p>
+            </div>
+            <div class="pill">Glow</div>
+          </div>
+          <div class="img">
+            <div style="font-weight:800;">Incluye:</div>
+            <div class="items">
+              <span class="tag">Bases</span>
+              <span class="tag">Correctores</span>
+              <span class="tag">Polvos</span>
+              <span class="tag">Prebases</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="counter">
+          <div class="top">
+            <div>
+              <h3>💋 Labios</h3>
+              <p>Gloss, labiales y liners con colores vibrantes.</p>
+            </div>
+            <div class="pill">Color</div>
+          </div>
+          <div class="img">
+            <div style="font-weight:800;">Incluye:</div>
+            <div class="items">
+              <span class="tag">Lápiz labial</span>
+              <span class="tag">Gloss</span>
+              <span class="tag">Liner</span>
+              <span class="tag">Tratamientos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="counter">
+          <div class="top">
+            <div>
+              <h3>👁️ Ojos & Mirada</h3>
+              <p>Sombras, delineados y pestañas para destacar.</p>
+            </div>
+            <div class="pill">Eyes</div>
+          </div>
+          <div class="img">
+            <div style="font-weight:800;">Incluye:</div>
+            <div class="items">
+              <span class="tag">Sombras</span>
+              <span class="tag">Delineadores</span>
+              <span class="tag">Mascara</span>
+              <span class="tag">Pestañas</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="counter">
+          <div class="top">
+            <div>
+              <h3>🌸 Mejillas</h3>
+              <p>Rubor y contorno para esculpir con naturalidad.</p>
+            </div>
+            <div class="pill">Fresh</div>
+          </div>
+          <div class="img">
+            <div style="font-weight:800;">Incluye:</div>
+            <div class="items">
+              <span class="tag">Rubor crema</span>
+              <span class="tag">Bronzer</span>
+              <span class="tag">Iluminador</span>
+              <span class="tag">Set</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="counter">
+          <div class="top">
+            <div>
+              <h3>🧼 Skincare para makeup</h3>
+              <p>Rutina antes del maquillaje: piel hidratada, mejor acabado.</p>
+            </div>
+            <div class="pill">Skin</div>
+          </div>
+          <div class="img">
+            <div style="font-weight:800;">Incluye:</div>
+            <div class="items">
+              <span class="tag">Limpiadores</span>
+              <span class="tag">Hidratantes</span>
+              <span class="tag">Protector</span>
+              <span class="tag">Serums</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="counter">
+          <div class="top">
+            <div>
+              <h3>🧴 Brochas & Accesorios</h3>
+              <p>Herramientas para aplicar con precisión.</p>
+            </div>
+            <div class="pill">Tools</div>
+          </div>
+          <div class="img">
+            <div style="font-weight:800;">Incluye:</div>
+            <div class="items">
+              <span class="tag">Brochas</span>
+              <span class="tag">Esponjas</span>
+              <span class="tag">Set de viaje</span>
+              <span class="tag">Limpiador</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Productos (bloque extra) -->
+    <section id="productos">
+      <div class="section-title">
+        <h2>✨ Destacados</h2>
+        <p>Ideas rápidas para armar tu kit.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>🌟 Kit “Natural y bonito”</h3>
+          <p>Perfecto para diario, con acabado ligero y luminoso.</p>
+          <ul class="list">
+            <li>Base ligera o BB</li>
+            <li>Corrector en zonas</li>
+            <li>Rubor en crema</li>
+            <li>Gloss hidratante</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🔥 Kit “Glam para evento”</h3>
+          <p>Para noches especiales: más pigmento, más impacto.</p>
+          <ul class="list">
+            <li>Base de mayor cobertura</li>
+            <li>Paleta de sombras</li>
+            <li>Delineado y pestañas</li>
+            <li>Labial de larga duración</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section id="nosotros">
+      <div class="section-title">
+        <h2>💬 Sobre BeautyBox</h2>
+        <p>Tu aliado para encontrar tu estilo.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>👩‍🎨 Asesoría en mostrador</h3>
+          <p>
+            Te ayudamos a elegir el tono, la textura y el acabado según tu tipo de piel.
+            Si no sabes por dónde empezar, empieza por tu objetivo.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧡 Valores</h3>
+          <p>
+            Buscamos opciones de calidad y brindamos recomendaciones claras. Si quieres una rutina
+            sencilla o un look más elaborado, aquí hay un camino.
+          </p>
+          <ul class="list">
+            <li>Opciones cruelty-free</li>
+            <li>Productos para diferentes tonos</li>
+            <li>Tips y combinaciones</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+      <div class="section-title">
+        <h2>📞 Contacto</h2>
+        <p>Reserva o pregunta por tu producto.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>📍 Dirección & Horario</h3>
+          <p><strong>Dirección:</strong> Av. Siempre Viva 123, Centro</p>
+          <p style="margin-top:10px;"><strong>Horario:</strong> Lun–Sáb 10:00–19:00</p>
+          <p style="margin-top:10px;"><strong>WhatsApp:</strong> +52 55 1234 5678</p>
+        </div>
+
+        <div class="card">
+          <h3>📝 Mensaje (demo)</h3>
+          <p>Este formulario no envía a un servidor, pero puedes conectarlo después.</p>
+
+          <form onsubmit="event.preventDefault(); alert('✅ Gracias. Te responderemos pronto.');" style="margin-top:12px;">
+            <label class="sr-only" for="nombre">Nombre</label>
+            <input id="nombre" placeholder="Tu nombre" required
+              style="width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--border);margin-bottom:10px;outline:none;background:rgba(255,255,255,.75);">
+
+            <label class="sr-only" for="correo">Correo</label>
+            <input id="correo" type="email" placeholder="Tu correo" required
+              style="width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--border);margin-bottom:10px;outline:none;background:rgba(255,255,255,.75);">
+
+            <label class="sr-only" for="mensaje">Mensaje</label>
+            <textarea id="mensaje" rows="4" placeholder="¿Qué necesitas? (ej. base para piel mixta)" required
+              style="width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--border);margin-bottom:12px;outline:none;background:rgba(255,255,255,.75);"></textarea>
+
+            <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">
+              ✨ Enviar mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>© <span id="year"></span> BeautyBox • Todos los derechos reservados 💖</div>
+        <div class="social">
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="Facebook">📘 Facebook</a>
+          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
